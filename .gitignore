@@ -1,0 +1,11 @@
+node_modules/
+.DS_Store
+Thumbs.db
+*.log
+.vercel
+
+# установленные скиллы агента (восстановить: npx skills experimental_install)
+.agents/
+
+# локальный конфиг инструментов (зависит от машины)
+.claude/

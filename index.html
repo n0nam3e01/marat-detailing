@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MARAT DETAILING — Детейлинг, бронеплёнка, шумоизоляция в Астане</title>
+  <meta name="description" content="Студия детейлинга MARAT DETAILING в Астане: детейлинг-мойка и химчистка, бронеплёнка (PPF), керамика, полировка кузова и шумоизоляция. Защита и блеск вашего автомобиля." />
+  <meta name="theme-color" content="#0a0a0b" />
+  <script>document.documentElement.classList.add("has-js");</script>
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="MARAT DETAILING — детейлинг-студия в Астане" />
+  <meta property="og:description" content="Детейлинг, бронеплёнка (PPF), керамика, полировка и шумоизоляция. Астана." />
+  <meta property="og:locale" content="ru_RU" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Expanded:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230a0a0b'/%3E%3Cpath d='M16 6c4 5 6 8 6 11a6 6 0 1 1-12 0c0-3 2-6 6-11z' fill='none' stroke='%23ffc400' stroke-width='1.6'/%3E%3C/svg%3E" />
+</head>
+<body>
+  <!-- fine grain + vignette overlay -->
+  <div class="fx-grain" aria-hidden="true"></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a class="brand" href="#top" aria-label="МАРАТ ДЕТЕЙЛИНГ — на главную">
+        <img class="brand-logo" src="logo.png" alt="МАРАТ ДЕТЕЙЛИНГ" hidden
+             onload="this.hidden=false; this.nextElementSibling.hidden=true;" onerror="this.remove()" />
+        <span class="brand-fallback">
+          <svg viewBox="0 0 164 56" role="img" aria-label="МАРАТ ДЕТЕЙЛИНГ" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mdSilverH" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#d9dce0"/><stop offset="1" stop-color="#9aa0a6"/>
+              </linearGradient>
+              <linearGradient id="mdRedH" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffd54a"/><stop offset="1" stop-color="#f0a500"/>
+              </linearGradient>
+            </defs>
+            <path d="M7 8 L18 8 L11 50 L0 50 Z" fill="url(#mdRedH)"/>
+            <path d="M23 8 L31 8 L24 50 L16 50 Z" fill="url(#mdRedH)" opacity="0.85"/>
+            <text x="44" y="30" font-family="'Archivo Expanded','Manrope',sans-serif" font-weight="700" font-size="30" letter-spacing="1" fill="url(#mdSilverH)">МАРАТ</text>
+            <text x="46" y="49" font-family="'Manrope',sans-serif" font-weight="600" font-size="11" letter-spacing="4.4" fill="#c4c5c9">ДЕТЕЙЛИНГ</text>
+          </svg>
+        </span>
+      </a>
+
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#process" data-i18n="nav.process">Как работаем</a>
+        <a href="#works" data-i18n="nav.works">Работы</a>
+        <a href="#about" data-i18n="nav.about">Студия</a>
+        <a href="#lead" data-i18n="nav.lead">Заявка</a>
+        <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="lang-switch" role="group" aria-label="Язык сайта">
+          <button type="button" class="lang-btn is-active" data-lang="ru">RU</button>
+          <button type="button" class="lang-btn" data-lang="kz">ҚАЗ</button>
+        </div>
+        <a class="btn btn-primary header-cta" href="#lead">
+          <span data-i18n="cta.book">Записаться</span>
+          <span class="btn-ico" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </span>
+        </a>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Меню" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- mobile drawer -->
+    <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav aria-label="Мобильная навигация">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#process" data-i18n="nav.process">Как работаем</a>
+        <a href="#works" data-i18n="nav.works">Работы</a>
+        <a href="#about" data-i18n="nav.about">Студия</a>
+        <a href="#lead" data-i18n="nav.lead">Заявка</a>
+        <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
+      </nav>
+      <a class="btn btn-primary" href="#lead"><span data-i18n="cta.book">Записаться</span></a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-beads" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <p class="hero-eyebrow reveal" data-i18n="hero.eyebrow">Детейлинг-студия · Астана</p>
+        <h1 class="hero-title reveal" data-i18n="hero.title">Блеск, который держится.<br />Защита, которую видно.</h1>
+        <p class="hero-lead reveal" data-i18n="hero.lead">
+          Детейлинг, бронеплёнка, керамика и шумоизоляция. Возвращаем автомобилю
+          заводской вид и защищаем его от дороги, реагентов и времени.
+        </p>
+        <div class="hero-actions reveal">
+          <a class="btn btn-primary btn-lg" data-contact="whatsapp" href="#contacts">
+            <span data-i18n="hero.cta1">Записаться на приём</span>
+            <span class="btn-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </span>
+          </a>
+          <a class="btn btn-ghost btn-lg" href="#works">
+            <span data-i18n="hero.cta2">Смотреть работы</span>
+          </a>
+        </div>
+
+        <dl class="hero-stats reveal">
+          <div><dt>7+</dt><dd data-i18n="hero.stat1">лет опыта</dd></div>
+          <div><dt>1200+</dt><dd data-i18n="hero.stat2">авто в год</dd></div>
+          <div><dt>100%</dt><dd data-i18n="hero.stat3">оригинальные материалы</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============ MARQUEE ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>Детейлинг</span><i>◆</i><span>Бронеплёнка PPF</span><i>◆</i><span>Керамика</span><i>◆</i>
+        <span>Полировка кузова</span><i>◆</i><span>Шумоизоляция</span><i>◆</i><span>Химчистка салона</span><i>◆</i>
+        <span>Детейлинг</span><i>◆</i><span>Бронеплёнка PPF</span><i>◆</i><span>Керамика</span><i>◆</i>
+        <span>Полировка кузова</span><i>◆</i><span>Шумоизоляция</span><i>◆</i><span>Химчистка салона</span><i>◆</i>
+      </div>
+    </div>
+
+    <!-- ============ SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-title" data-i18n="services.title">Услуги студии</h2>
+          <p class="section-desc" data-i18n="services.desc">Полный цикл ухода и защиты: от экспресс-детейлинга до полной оклейки бронеплёнкой.</p>
+        </header>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 5c5 6 7.5 9.5 7.5 13a7.5 7.5 0 0 1-15 0C8.5 14.5 11 11 16 5z"/><path d="M12.5 18a3.5 3.5 0 0 0 3.5 3.5"/></svg>
+            </span>
+            <h3 data-i18n="svc.detailing.t">Детейлинг-мойка</h3>
+            <p data-i18n="svc.detailing.d">Бесконтактная мойка, глубокая чистка кузова, дисков и подкапотного пространства.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l10 3.5V15c0 6.5-4.3 10.6-10 13-5.7-2.4-10-6.5-10-13V7.5L16 4z"/><path d="m12 15.5 3 3 5.5-6"/></svg>
+            </span>
+            <h3 data-i18n="svc.ppf.t">Бронеплёнка (PPF)</h3>
+            <p data-i18n="svc.ppf.d">Полная и локальная оклейка полиуретаном. Защита от сколов, царапин и реагентов.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 13v6h4l6 5V8l-6 5H6z"/><path d="M20 12a5 5 0 0 1 0 8M23.5 9.5a9 9 0 0 1 0 13"/></svg>
+            </span>
+            <h3 data-i18n="svc.noise.t">Шумоизоляция</h3>
+            <p data-i18n="svc.noise.d">Тише в салоне, плотнее звук дверей. Обработка от вибраций и дорожного гула.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="16" r="5.5"/><path d="M16 3v4M16 25v4M3 16h4M25 16h4M6.7 6.7l2.8 2.8M22.5 22.5l2.8 2.8M25.3 6.7l-2.8 2.8M9.5 22.5l-2.8 2.8"/></svg>
+            </span>
+            <h3 data-i18n="svc.polish.t">Полировка кузова</h3>
+            <p data-i18n="svc.polish.d">Удаление рисок и голограмм, восстановление глубины цвета и зеркального блеска.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l10.4 6v12L16 28 5.6 22V10L16 4z"/><path d="M16 12.5 21 15.5v3L16 21l-5-2.5v-3L16 12.5z"/></svg>
+            </span>
+            <h3 data-i18n="svc.ceramic.t">Керамика</h3>
+            <p data-i18n="svc.ceramic.d">Керамическое покрытие: гидрофобный эффект, стойкий блеск и лёгкая мойка.</p>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="service-ico" aria-hidden="true">
+              <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 20c0-3 2.5-5 6-5s6 2 6 5v3H7v-3z"/><path d="M19 15l4-8 3 1-3 8"/><path d="M9 12V8a3 3 0 0 1 6 0v3"/></svg>
+            </span>
+            <h3 data-i18n="svc.interior.t">Химчистка салона</h3>
+            <p data-i18n="svc.interior.d">Глубокая чистка кожи, ткани и пластика. Удаление запахов, антибактериальная обработка.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section section-alt" id="process">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-title" data-i18n="process.title">Как проходит работа</h2>
+          <p class="section-desc" data-i18n="process.desc">Прозрачный процесс без сюрпризов, от записи до выдачи автомобиля.</p>
+        </header>
+
+        <ol class="process-list">
+          <li class="process-step reveal">
+            <span class="process-num">01</span>
+            <h3 data-i18n="step1.t">Запись и приёмка</h3>
+            <p data-i18n="step1.d">Обсуждаем задачу, осматриваем авто, фиксируем состояние и согласуем смету.</p>
+          </li>
+          <li class="process-step reveal">
+            <span class="process-num">02</span>
+            <h3 data-i18n="step2.t">Работа в студии</h3>
+            <p data-i18n="step2.d">Подготовка, мойка, работы по кузову и салону. Только оригинальные материалы.</p>
+          </li>
+          <li class="process-step reveal">
+            <span class="process-num">03</span>
+            <h3 data-i18n="step3.t">Приёмка и гарантия</h3>
+            <p data-i18n="step3.d">Показываем результат при ярком свете, даём рекомендации по уходу и гарантию.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ WORKS ============ -->
+    <section class="section" id="works">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-title" data-i18n="works.title">Наши работы</h2>
+          <p class="section-desc" data-i18n="works.desc">Несколько проектов из студии. Полная лента в Instagram.</p>
+        </header>
+
+        <div class="works-grid">
+          <figure class="work-tile work-tall reveal"><figcaption data-i18n="work.1">Оклейка PPF · чёрный кузов</figcaption></figure>
+          <figure class="work-tile reveal"><figcaption data-i18n="work.2">Керамика · глубокий блеск</figcaption></figure>
+          <figure class="work-tile reveal"><figcaption data-i18n="work.3">Полировка · до / после</figcaption></figure>
+          <figure class="work-tile work-wide reveal"><figcaption data-i18n="work.4">Химчистка салона</figcaption></figure>
+          <figure class="work-tile reveal"><figcaption data-i18n="work.5">Детейлинг дисков</figcaption></figure>
+        </div>
+
+        <div class="works-cta reveal">
+          <a class="btn btn-ghost" data-contact="instagram" href="https://www.instagram.com/marat_detailing/" target="_blank" rel="noopener">
+            <span data-i18n="works.more">Больше работ в Instagram</span>
+            <span class="btn-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section section-alt" id="about">
+      <div class="container about-inner">
+        <div class="about-copy reveal">
+          <h2 class="section-title" data-i18n="about.title">Студия MARAT DETAILING</h2>
+          <p data-i18n="about.p1">Мы — детейлинг-студия в Астане. Работаем аккуратно и по технологии: чистый бокс, правильный свет, проверенные материалы и внимание к деталям, которые видно на результате.</p>
+          <p data-i18n="about.p2">Беремся как за экспресс-уход, так и за сложные проекты: полную оклейку бронеплёнкой, керамику и комплексную шумоизоляцию. На каждую работу даём гарантию.</p>
+          <ul class="about-points">
+            <li data-i18n="about.pt1">Оригинальные плёнки и составы</li>
+            <li data-i18n="about.pt2">Чистый отапливаемый бокс</li>
+            <li data-i18n="about.pt3">Фотоотчёт по этапам</li>
+            <li data-i18n="about.pt4">Гарантия на работы</li>
+          </ul>
+        </div>
+        <aside class="about-card reveal">
+          <p class="about-quote" data-i18n="about.quote">«Делаем так, как сделали бы для своей машины».</p>
+          <p class="about-quote-by" data-i18n="about.by">— команда MARAT DETAILING</p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ============ LEAD FORM ============ -->
+    <section class="section section-lead" id="lead">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="container lead-inner">
+        <div class="lead-copy reveal">
+          <h2 class="section-title" data-i18n="lead.title">Оставьте заявку</h2>
+          <p class="section-desc" data-i18n="lead.desc">Оставьте имя и телефон, свяжемся в WhatsApp, ответим на вопросы и подберём удобное время.</p>
+          <ul class="lead-points">
+            <li data-i18n="lead.pt1">Ответим в течение рабочего дня</li>
+            <li data-i18n="lead.pt2">Бесплатная консультация и расчёт стоимости</li>
+            <li data-i18n="lead.pt3">Без спама и звонков роботов</li>
+          </ul>
+        </div>
+
+        <form class="lead-form reveal" id="leadForm" novalidate>
+          <div class="field">
+            <label for="leadName" data-i18n="lead.name">Ваше имя</label>
+            <input id="leadName" name="name" type="text" autocomplete="name" required
+                   placeholder="Например, Айдос" data-i18n-ph="lead.namePh" />
+          </div>
+          <div class="field">
+            <label for="leadPhone" data-i18n="lead.phone">Телефон</label>
+            <input id="leadPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required
+                   placeholder="+7 (___) ___-__-__" />
+          </div>
+          <div class="field">
+            <label for="leadService" data-i18n="lead.service">Услуга (необязательно)</label>
+            <select id="leadService" name="service">
+              <option value="" data-i18n="lead.serviceAny">Не выбрано</option>
+              <option data-i18n="svc.detailing.t">Детейлинг-мойка</option>
+              <option data-i18n="svc.ppf.t">Бронеплёнка (PPF)</option>
+              <option data-i18n="svc.ceramic.t">Керамика</option>
+              <option data-i18n="svc.polish.t">Полировка кузова</option>
+              <option data-i18n="svc.noise.t">Шумоизоляция</option>
+              <option data-i18n="svc.interior.t">Химчистка салона</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg lead-submit">
+            <span data-i18n="lead.submit">Отправить в WhatsApp</span>
+            <span class="btn-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5.6 0 1-.6 1-.6l-1.4-1-1 .6c-1-.4-2-1.4-2.4-2.4l.6-1-1-1.4s-.6.4-.6 1z"/></svg>
+            </span>
+          </button>
+          <p class="lead-status" id="leadStatus" role="status" aria-live="polite" hidden></p>
+          <p class="lead-consent" data-i18n="lead.consent">Нажимая кнопку, вы соглашаетесь на обработку персональных данных.</p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section section-alt" id="faq">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-title" data-i18n="faq.title">Частые вопросы</h2>
+          <p class="section-desc" data-i18n="faq.desc">Коротко о том, что чаще всего спрашивают.</p>
+        </header>
+        <div class="faq-list">
+          <details class="faq-item reveal">
+            <summary>
+              <span class="faq-q" data-i18n="faq.q1">Сколько времени занимает оклейка бронеплёнкой?</span>
+              <span class="faq-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="faq-a"><p data-i18n="faq.a1">Полная оклейка кузова обычно занимает от 3 до 7 дней в зависимости от объёма и модели. Локальные зоны делаем за день. Точные сроки назовём после осмотра.</p></div>
+          </details>
+          <details class="faq-item reveal">
+            <summary>
+              <span class="faq-q" data-i18n="faq.q2">Даёте ли гарантию на работы?</span>
+              <span class="faq-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="faq-a"><p data-i18n="faq.a2">Да. На бронеплёнку и керамику действует гарантия производителя и студии. Условия зависят от материала, всё расскажем при записи.</p></div>
+          </details>
+          <details class="faq-item reveal">
+            <summary>
+              <span class="faq-q" data-i18n="faq.q3">Нужно ли записываться заранее?</span>
+              <span class="faq-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="faq-a"><p data-i18n="faq.a3">Желательно. Так мы подготовим бокс и материалы к вашему приезду и не заставим ждать. Оставьте заявку, подберём удобное время.</p></div>
+          </details>
+          <details class="faq-item reveal">
+            <summary>
+              <span class="faq-q" data-i18n="faq.q4">Можно ли оклеить только часть авто?</span>
+              <span class="faq-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="faq-a"><p data-i18n="faq.a4">Конечно. Часто защищают зоны риска: капот, бампер, зеркала, пороги и фары. Это дешевле полной оклейки и бережёт самые уязвимые места.</p></div>
+          </details>
+          <details class="faq-item reveal">
+            <summary>
+              <span class="faq-q" data-i18n="faq.q5">Сколько держится керамика?</span>
+              <span class="faq-mark" aria-hidden="true"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+            </summary>
+            <div class="faq-a"><p data-i18n="faq.a5">В среднем от 1 до 3 лет в зависимости от состава и ухода. Гидрофобный эффект и блеск сохраняются весь срок, а мойка становится проще.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTACTS + MAP ============ -->
+    <section class="section" id="contacts">
+      <div class="container">
+        <header class="section-head reveal">
+          <h2 class="section-title" data-i18n="contacts.title">Контакты и запись</h2>
+          <p class="section-desc" data-i18n="contacts.desc">Напишите или позвоните, подберём время и рассчитаем стоимость.</p>
+        </header>
+
+        <div class="contacts-grid">
+          <div class="contacts-info reveal">
+            <div class="contact-row">
+              <span class="contact-label" data-i18n="contacts.address">Адрес</span>
+              <span class="contact-value" id="addressValue" data-i18n="contacts.city">Астана, Казахстан</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label" data-i18n="contacts.hours">Часы работы</span>
+              <span class="contact-value" data-i18n="contacts.hoursValue">Ежедневно · 10:00 – 20:00</span>
+            </div>
+
+            <div class="contact-buttons">
+              <a class="contact-btn" data-contact="instagram" href="https://www.instagram.com/marat_detailing/" target="_blank" rel="noopener">
+                <span class="contact-btn-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+                </span>
+                <span>Instagram</span>
+              </a>
+              <a class="contact-btn" data-contact="whatsapp" href="#">
+                <span class="contact-btn-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12a8 8 0 0 1-11.8 7L4 20l1.1-4A8 8 0 1 1 20 12z"/><path d="M9 9.5c0 3 2.5 5.5 5.5 5.5.6 0 1-.6 1-.6l-1.4-1-1 .6c-1-.4-2-1.4-2.4-2.4l.6-1-1-1.4s-.6.4-.6 1z"/></svg>
+                </span>
+                <span>WhatsApp</span>
+              </a>
+              <a class="contact-btn" data-contact="phone" href="#">
+                <span class="contact-btn-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3l1.5 4-2 1.5a11 11 0 0 0 5 5l1.5-2 4 1.5V22a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>
+                </span>
+                <span data-i18n="contacts.call">Позвонить</span>
+              </a>
+              <a class="contact-btn" data-contact="tiktok" href="#">
+                <span class="contact-btn-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4v10.5a3.5 3.5 0 1 1-3-3.46"/><path d="M14 7a5 5 0 0 0 5 4"/></svg>
+                </span>
+                <span>TikTok</span>
+              </a>
+              <a class="contact-btn" data-contact="twogis" href="#">
+                <span class="contact-btn-ico" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.3 7-11a7 7 0 0 0-14 0c0 4.7 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>
+                </span>
+                <span data-i18n="contacts.map2gis">2ГИС</span>
+              </a>
+            </div>
+            <p class="contact-note" data-contact-note hidden data-i18n="contacts.note">Кнопки без ссылки появятся, когда вы добавите номер/ссылку в script.js.</p>
+          </div>
+
+          <div class="map-wrap reveal">
+            <iframe id="mapFrame" title="Карта — MARAT DETAILING, Астана" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            <a class="map-open" id="mapOpen" href="#" target="_blank" rel="noopener" data-i18n="contacts.openMap">Открыть в картах ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#top" aria-label="МАРАТ ДЕТЕЙЛИНГ">
+        <img class="brand-logo" src="logo.png" alt="МАРАТ ДЕТЕЙЛИНГ" hidden
+             onload="this.hidden=false; this.nextElementSibling.hidden=true;" onerror="this.remove()" />
+        <span class="brand-fallback">
+          <svg viewBox="0 0 164 56" role="img" aria-label="МАРАТ ДЕТЕЙЛИНГ" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mdSilverF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffffff"/><stop offset="0.55" stop-color="#d9dce0"/><stop offset="1" stop-color="#9aa0a6"/>
+              </linearGradient>
+              <linearGradient id="mdRedF" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#ffd54a"/><stop offset="1" stop-color="#f0a500"/>
+              </linearGradient>
+            </defs>
+            <path d="M7 8 L18 8 L11 50 L0 50 Z" fill="url(#mdRedF)"/>
+            <path d="M23 8 L31 8 L24 50 L16 50 Z" fill="url(#mdRedF)" opacity="0.85"/>
+            <text x="44" y="30" font-family="'Archivo Expanded','Manrope',sans-serif" font-weight="700" font-size="30" letter-spacing="1" fill="url(#mdSilverF)">МАРАТ</text>
+            <text x="46" y="49" font-family="'Manrope',sans-serif" font-weight="600" font-size="11" letter-spacing="4.4" fill="#c4c5c9">ДЕТЕЙЛИНГ</text>
+          </svg>
+        </span>
+      </a>
+      <p class="footer-tag" data-i18n="footer.tag">Детейлинг · Бронеплёнка · Керамика · Шумоизоляция · Астана</p>
+      <nav class="footer-nav" aria-label="Подвал">
+        <a href="#services" data-i18n="nav.services">Услуги</a>
+        <a href="#works" data-i18n="nav.works">Работы</a>
+        <a href="#contacts" data-i18n="nav.contacts">Контакты</a>
+        <a data-contact="instagram" href="https://www.instagram.com/marat_detailing/" target="_blank" rel="noopener">Instagram</a>
+      </nav>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year">2026</span> MARAT DETAILING</span>
+      <span data-i18n="footer.made">Сделано с вниманием к деталям</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
