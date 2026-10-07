@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /design/
+Disallow: /tests/
+Disallow: /scripts/server.cjs
+Sitemap: https://marat-detailing.vercel.app/sitemap.xml

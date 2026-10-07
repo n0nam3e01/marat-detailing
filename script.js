@@ -1,436 +1,408 @@
-/* =========================================================
-   MARAT DETAILING — логика сайта
-   ▼▼▼  ВСЕ НАСТРОЙКИ ЗДЕСЬ — заполните и сохраните  ▼▼▼
-   ========================================================= */
-const CONFIG = {
-  // Instagram уже заполнен:
-  instagram: "https://www.instagram.com/marat_detailing/",
+/* UI behavior and translations. Business settings live in config.js. */
+(() => {
+  "use strict";
+  const config = window.MARAT_CONFIG;
+  const links = window.MaratLinks;
+  if (!config || !links) return;
 
-  // WhatsApp: номер в международном формате, только цифры (без + и пробелов).
-  // Пример: "77001234567". Пусто = кнопка станет неактивной.
-  whatsapp: "",
-
-  // Телефон для звонка. Пример: "+7 700 123 45 67". Пусто = кнопка неактивна.
-  phone: "",
-
-  // TikTok: полная ссылка. Пример: "https://www.tiktok.com/@marat_detailing".
-  tiktok: "",
-
-  // 2ГИС: полная ссылка на карточку студии. Пример: "https://2gis.kz/astana/firm/...".
-  twogis: "",
-
-  // Точный адрес студии. Пример: "Астана, ул. Кабанбай батыра, 00".
-  // Пусто = карта показывает город целиком.
-  address: "",
-
-  // Что показывать на карте, если точного адреса ещё нет:
-  mapQuery: "Астана, Казахстан",
-};
-/* ▲▲▲  КОНЕЦ НАСТРОЕК  ▲▲▲ */
-
-// Текущий язык (используется формой заявки для текста сообщения).
-let currentLang = "ru";
-
-/* =============== ПЕРЕВОДЫ RU / ҚАЗ =============== */
-const I18N = {
-  ru: {
-    "nav.services": "Услуги", "nav.process": "Как работаем", "nav.works": "Работы",
-    "nav.about": "Студия", "nav.contacts": "Контакты", "cta.book": "Записаться",
-    "hero.eyebrow": "Детейлинг-студия · Астана",
-    "hero.title": "Блеск, который держится.<br />Защита, которую видно.",
-    "hero.lead": "Детейлинг, бронеплёнка, керамика и шумоизоляция. Возвращаем автомобилю заводской вид и защищаем его от дороги, реагентов и времени.",
-    "hero.cta1": "Записаться на приём", "hero.cta2": "Смотреть работы",
-    "hero.stat1": "лет опыта", "hero.stat2": "авто в год", "hero.stat3": "оригинальные материалы",
-    "services.title": "Услуги студии",
-    "services.desc": "Полный цикл ухода и защиты: от экспресс-детейлинга до полной оклейки бронеплёнкой.",
-    "svc.detailing.t": "Детейлинг-мойка",
-    "svc.detailing.d": "Бесконтактная мойка, глубокая чистка кузова, дисков и подкапотного пространства.",
-    "svc.ppf.t": "Бронеплёнка (PPF)",
-    "svc.ppf.d": "Полная и локальная оклейка полиуретаном. Защита от сколов, царапин и реагентов.",
-    "svc.noise.t": "Шумоизоляция",
-    "svc.noise.d": "Тише в салоне, плотнее звук дверей. Обработка от вибраций и дорожного гула.",
-    "svc.polish.t": "Полировка кузова",
-    "svc.polish.d": "Удаление рисок и голограмм, восстановление глубины цвета и зеркального блеска.",
-    "svc.ceramic.t": "Керамика",
-    "svc.ceramic.d": "Керамическое покрытие: гидрофобный эффект, стойкий блеск и лёгкая мойка.",
-    "svc.interior.t": "Химчистка салона",
-    "svc.interior.d": "Глубокая чистка кожи, ткани и пластика. Удаление запахов, антибактериальная обработка.",
-    "process.title": "Как проходит работа",
-    "process.desc": "Прозрачный процесс без сюрпризов, от записи до выдачи автомобиля.",
-    "step1.t": "Запись и приёмка",
-    "step1.d": "Обсуждаем задачу, осматриваем авто, фиксируем состояние и согласуем смету.",
-    "step2.t": "Работа в студии",
-    "step2.d": "Подготовка, мойка, работы по кузову и салону. Только оригинальные материалы.",
-    "step3.t": "Приёмка и гарантия",
-    "step3.d": "Показываем результат при ярком свете, даём рекомендации по уходу и гарантию.",
-    "works.title": "Наши работы",
-    "works.desc": "Несколько проектов из студии. Полная лента в Instagram.",
-    "work.1": "Оклейка PPF · чёрный кузов", "work.2": "Керамика · глубокий блеск",
-    "work.3": "Полировка · до / после", "work.4": "Химчистка салона", "work.5": "Детейлинг дисков",
-    "works.more": "Больше работ в Instagram",
-    "about.title": "Студия MARAT DETAILING",
-    "about.p1": "Мы — детейлинг-студия в Астане. Работаем аккуратно и по технологии: чистый бокс, правильный свет, проверенные материалы и внимание к деталям, которые видно на результате.",
-    "about.p2": "Беремся как за экспресс-уход, так и за сложные проекты: полную оклейку бронеплёнкой, керамику и комплексную шумоизоляцию. На каждую работу даём гарантию.",
-    "about.pt1": "Оригинальные плёнки и составы", "about.pt2": "Чистый отапливаемый бокс",
-    "about.pt3": "Фотоотчёт по этапам", "about.pt4": "Гарантия на работы",
-    "about.quote": "«Делаем так, как сделали бы для своей машины».",
-    "about.by": "— команда MARAT DETAILING",
-    "contacts.title": "Контакты и запись",
-    "contacts.desc": "Напишите или позвоните, подберём время и рассчитаем стоимость.",
-    "contacts.address": "Адрес", "contacts.city": "Астана, Казахстан",
-    "contacts.hours": "Часы работы", "contacts.hoursValue": "Ежедневно · 10:00 – 20:00",
-    "contacts.call": "Позвонить", "contacts.map2gis": "2ГИС",
-    "contacts.note": "Кнопки без ссылки появятся, когда вы добавите номер/ссылку в script.js.",
-    "contacts.openMap": "Открыть в картах ↗",
-    "footer.tag": "Детейлинг · Бронеплёнка · Керамика · Шумоизоляция · Астана",
-    "footer.made": "Сделано с вниманием к деталям",
-    "nav.lead": "Заявка",
-    "lead.title": "Оставьте заявку",
-    "lead.desc": "Оставьте имя и телефон, свяжемся в WhatsApp, ответим на вопросы и подберём удобное время.",
-    "lead.pt1": "Ответим в течение рабочего дня",
-    "lead.pt2": "Бесплатная консультация и расчёт стоимости",
-    "lead.pt3": "Без спама и звонков роботов",
-    "lead.name": "Ваше имя",
-    "lead.namePh": "Например, Айдос",
-    "lead.phone": "Телефон",
-    "lead.service": "Услуга (необязательно)",
-    "lead.serviceAny": "Не выбрано",
-    "lead.submit": "Отправить в WhatsApp",
-    "lead.consent": "Нажимая кнопку, вы соглашаетесь на обработку персональных данных.",
-    "lead.ok": "Открываем WhatsApp с вашей заявкой…",
-    "lead.errName": "Пожалуйста, укажите имя.",
-    "lead.errPhone": "Введите корректный номер телефона.",
-    "lead.errNoWa": "Добавьте номер WhatsApp в script.js (CONFIG.whatsapp), чтобы заявки уходили в WhatsApp.",
-    "lead.msgIntro": "Здравствуйте! Заявка с сайта MARAT DETAILING.",
-    "lead.msgName": "Имя:",
-    "lead.msgPhone": "Телефон:",
-    "lead.msgService": "Услуга:",
-    "faq.title": "Частые вопросы",
-    "faq.desc": "Коротко о том, что чаще всего спрашивают.",
-    "faq.q1": "Сколько времени занимает оклейка бронеплёнкой?",
-    "faq.a1": "Полная оклейка кузова обычно занимает от 3 до 7 дней в зависимости от объёма и модели. Локальные зоны делаем за день. Точные сроки назовём после осмотра.",
-    "faq.q2": "Даёте ли гарантию на работы?",
-    "faq.a2": "Да. На бронеплёнку и керамику действует гарантия производителя и студии. Условия зависят от материала, всё расскажем при записи.",
-    "faq.q3": "Нужно ли записываться заранее?",
-    "faq.a3": "Желательно. Так мы подготовим бокс и материалы к вашему приезду и не заставим ждать. Оставьте заявку, подберём удобное время.",
-    "faq.q4": "Можно ли оклеить только часть авто?",
-    "faq.a4": "Конечно. Часто защищают зоны риска: капот, бампер, зеркала, пороги и фары. Это дешевле полной оклейки и бережёт самые уязвимые места.",
-    "faq.q5": "Сколько держится керамика?",
-    "faq.a5": "В среднем от 1 до 3 лет в зависимости от состава и ухода. Гидрофобный эффект и блеск сохраняются весь срок, а мойка становится проще.",
-  },
-  kz: {
-    "nav.services": "Қызметтер", "nav.process": "Қалай жұмыс істейміз", "nav.works": "Жұмыстар",
-    "nav.about": "Студия", "nav.contacts": "Байланыс", "cta.book": "Жазылу",
-    "hero.eyebrow": "Детейлинг-студия · Астана",
-    "hero.title": "Ұзаққа сақталатын жылтыр.<br />Көзге көрінетін қорғаныс.",
-    "hero.lead": "Детейлинг, қорғаныш пленка, керамика және шуылдан оқшаулау. Автокөлікке зауыттық көрінісін қайтарып, оны жолдан, реагенттерден әрі уақыттан қорғаймыз.",
-    "hero.cta1": "Қабылдауға жазылу", "hero.cta2": "Жұмыстарды көру",
-    "hero.stat1": "жыл тәжірибе", "hero.stat2": "жылына көлік", "hero.stat3": "түпнұсқа материалдар",
-    "services.title": "Студия қызметтері",
-    "services.desc": "Толық күтім мен қорғаныс: экспресс-детейлингтен толық қорғаныш пленка жапсыруға дейін.",
-    "svc.detailing.t": "Детейлинг жуу",
-    "svc.detailing.d": "Контактісіз жуу, шанақты, дискілерді және қозғалтқыш бөлігін тереңдетіп тазалау.",
-    "svc.ppf.t": "Қорғаныш пленка (PPF)",
-    "svc.ppf.d": "Толық және жергілікті полиуретан жапсыру. Соққылардан, сызаттардан және реагенттерден қорғау.",
-    "svc.noise.t": "Шуылдан оқшаулау",
-    "svc.noise.d": "Салонда тыныш, есік дыбысы тығыз. Дірілден және жол гуілінен өңдеу.",
-    "svc.polish.t": "Шанақты жылтырату",
-    "svc.polish.d": "Сызаттар мен голограммаларды жою, түс тереңдігі мен айналы жылтырды қалпына келтіру.",
-    "svc.ceramic.t": "Керамика",
-    "svc.ceramic.d": "Керамикалық жабын: гидрофобты әсер, тұрақты жылтыр және жеңіл жуу.",
-    "svc.interior.t": "Салонды химиялық тазалау",
-    "svc.interior.d": "Тері, мата және пластикті тереңдетіп тазалау. Иістерді жою, бактерияға қарсы өңдеу.",
-    "process.title": "Жұмыс қалай жүреді",
-    "process.desc": "Тосын сыйсыз ашық процесс, жазылудан көлікті тапсыруға дейін.",
-    "step1.t": "Жазылу және қабылдау",
-    "step1.d": "Мәселені талқылап, көлікті қарап, жағдайын тіркеп, сметаны келісеміз.",
-    "step2.t": "Студиядағы жұмыс",
-    "step2.d": "Дайындық, жуу, шанақ пен салон жұмыстары. Тек түпнұсқа материалдар.",
-    "step3.t": "Тапсыру және кепілдік",
-    "step3.d": "Нәтижені жарық жерде көрсетіп, күтім бойынша кеңес пен кепілдік береміз.",
-    "works.title": "Біздің жұмыстар",
-    "works.desc": "Студиядан бірнеше жоба. Толық лента Instagram-да.",
-    "work.1": "PPF жапсыру · қара шанақ", "work.2": "Керамика · терең жылтыр",
-    "work.3": "Жылтырату · дейін / кейін", "work.4": "Салонды тазалау", "work.5": "Дискілер детейлингі",
-    "works.more": "Instagram-да көбірек жұмыс",
-    "about.title": "MARAT DETAILING студиясы",
-    "about.p1": "Біз — Астанадағы детейлинг-студиясымыз. Ұқыпты әрі технология бойынша жұмыс істейміз: таза бокс, дұрыс жарық, тексерілген материалдар және нәтижеде көрінетін ұсақ-түйекке мұқияттылық.",
-    "about.p2": "Экспресс-күтімді де, күрделі жобаларды да орындаймыз: толық қорғаныш пленка жапсыру, керамика және кешенді шуылдан оқшаулау. Әр жұмысқа кепілдік береміз.",
-    "about.pt1": "Түпнұсқа пленкалар мен құрамдар", "about.pt2": "Таза жылытылатын бокс",
-    "about.pt3": "Кезеңдер бойынша фотоесеп", "about.pt4": "Жұмыстарға кепілдік",
-    "about.quote": "«Өз көлігімізге істейтіндей істейміз».",
-    "about.by": "— MARAT DETAILING командасы",
-    "contacts.title": "Байланыс және жазылу",
-    "contacts.desc": "Жазыңыз немесе қоңырау шалыңыз, уақыт таңдап, бағасын есептейміз.",
-    "contacts.address": "Мекенжай", "contacts.city": "Астана, Қазақстан",
-    "contacts.hours": "Жұмыс уақыты", "contacts.hoursValue": "Күн сайын · 10:00 – 20:00",
-    "contacts.call": "Қоңырау шалу", "contacts.map2gis": "2ГИС",
-    "contacts.note": "Сілтемесіз батырмалар script.js-ке нөмір/сілтеме қосқанда белсенді болады.",
-    "contacts.openMap": "Картадан ашу ↗",
-    "footer.tag": "Детейлинг · Қорғаныш пленка · Керамика · Шуылдан оқшаулау · Астана",
-    "footer.made": "Ұсақ-түйекке мұқият жасалған",
+  const kk = {
+    skip: "Мазмұнға өту",
+    "nav.label": "Негізгі навигация",
+    "nav.mobile": "Мобильді навигация",
+    "nav.services": "Қызметтер",
+    "nav.works": "Жұмыстар",
+    "nav.about": "Студия",
+    "nav.contacts": "Байланыс",
+    "nav.process": "Жұмыс тәртібі",
     "nav.lead": "Өтінім",
-    "lead.title": "Өтінім қалдырыңыз",
-    "lead.desc": "Атыңыз бен телефоныңызды қалдырыңыз, WhatsApp арқылы хабарласып, сұрақтарға жауап беріп, ыңғайлы уақыт таңдаймыз.",
-    "lead.pt1": "Жұмыс күні ішінде жауап береміз",
-    "lead.pt2": "Тегін кеңес және баға есебі",
-    "lead.pt3": "Спам мен робот қоңыраулары жоқ",
-    "lead.name": "Атыңыз",
-    "lead.namePh": "Мысалы, Айдос",
-    "lead.phone": "Телефон",
-    "lead.service": "Қызмет (міндетті емес)",
-    "lead.serviceAny": "Таңдалмаған",
-    "lead.submit": "WhatsApp-қа жіберу",
-    "lead.consent": "Батырманы басу арқылы дербес деректерді өңдеуге келісесіз.",
-    "lead.ok": "Өтінішіңізбен WhatsApp ашылып жатыр…",
-    "lead.errName": "Атыңызды көрсетіңіз.",
-    "lead.errPhone": "Дұрыс телефон нөмірін енгізіңіз.",
-    "lead.errNoWa": "Өтінімдер WhatsApp-қа кетуі үшін script.js файлына нөмір қосыңыз (CONFIG.whatsapp).",
-    "lead.msgIntro": "Сәлеметсіз бе! MARAT DETAILING сайтынан өтінім.",
-    "lead.msgName": "Аты:",
-    "lead.msgPhone": "Телефон:",
-    "lead.msgService": "Қызмет:",
+    "lang.label": "Сайт тілі",
+    "menu.open": "Мәзірді ашу",
+    "menu.close": "Мәзірді жабу",
+    "cta.calculate": "Бағасын білу",
+    "cta.whatsapp": "WhatsApp-та талқылау",
+    "cta.services": "Қызметті таңдау",
+    "cta.ask": "Толығырақ білу",
+    "cta.instagram": "Instagram-ды көру",
+    "cta.consultation": "Кеңес алу",
+    "hero.location": "Астанадағы детейлинг-студия",
+    "hero.title1": "Сіздің көлігіңіз.",
+    "hero.title2": "Біздің қамқорлық.",
+    "hero.description":
+      "Кузовты қорғау, таза салон және әр сапардағы жайлылық. Мараттың жеке көзқарасымен.",
+    "services.title1": "Әр бөлшекке",
+    "services.title2": "қамқорлық.",
+    "services.description":
+      "Зауыттық бояуды сақтау, жылтырды қайтару немесе салонды тазалау. Көлігіңізге сәйкес шешімді таңдаймыз.",
+    "services.note":
+      "Баға көліктің түріне, күйіне және жұмыс көлеміне байланысты. Нақты бағаны жұмыс басталғанға дейін келісеміз.",
+    "service.ppf.title": "Қорғаныш пленкасы",
+    "service.ppf.description":
+      "Тас соққысы мен ұсақ сызаттардан қорғау. Осал аймақтарға немесе бүкіл кузовқа мөлдір PPF пленкасын жапсыру.",
+    "service.ppf.alt": "Кузовқа мөлдір қорғаныш пленкасын орнату",
+    "service.polish.title": "Жылтырату және кузов күтімі",
+    "service.polish.description":
+      "Лактың ұсақ ақауларын жойып, түсін қалпына келтіреміз. Қорғаныш жабындысын көлікті қарап таңдауға болады.",
+    "service.polish.alt": "Қара кузовты жылтырату машинасымен өңдеу",
+    "service.clean.title": "Салонды химиялық тазалау",
+    "service.clean.description":
+      "Орындықтар, төбе, еден және пластикті терең тазалау. Салон материалдарына ұқыпты күтім.",
+    "service.clean.alt": "Көлік орындығын экстрактормен тазалау",
+    "service.sound.title": "Шуды оқшаулау",
+    "service.sound.description":
+      "Есіктерді, еденді және басқа аймақтарды өңдеу. Сізге қандай шу кедергі келтіретінін талқылаймыз.",
+    "service.sound.alt": "Көлік есігінің ішіне шу оқшаулағыш орнату",
+    "service.sale.title": "Көлігіңізді сатуға дайындайсыз ба?",
+    "service.sale.description":
+      "Кузов, салон және сатып алушы байқайтын бөлшектерді кешенді дайындауды талқылаймыз.",
+    "service.wash.title": "Күнделікті күтім",
+    "service.wash.description":
+      "Детейлинг-жуу, әйнек пен фараларға күтім. Сәйкес нұсқаны Мараттан сұраңыз.",
+    "works.title1": "Нәтиже",
+    "works.title2": "бөлшектерде.",
+    "works.description":
+      "Біздің шеберхананың нақты жарияланымдары. Жұмыс барысы мен басқа жобаларды Instagram-нан көріңіз.",
+    "works.bmw": "Химиялық тазалау: дейін және кейін",
+    "works.bmw.alt":
+      "MARAT DETAILING: BMW 850i химиялық тазалауға дейін және кейін",
+    "works.getz": "Сатуға дайындаудың басы",
+    "works.getz.alt": "Hyundai Getz химиялық тазалау алдында шеберханада",
+    "works.instagramTitle": "Шеберханадан.\nСүзгісіз.",
+    "works.instagramDescription":
+      "Алғашқы тексеруден дайын нәтижеге дейін көлікпен не істейтінімізді көрсетеміз.",
+    "about.eyebrow": "Танысыңыз, Марат",
+    "about.title1": "Сіздің жеке",
+    "about.title2": "детейлеріңіз.",
+    "about.lead": "«Мен Маратпын, сіздің жеке детейлеріңіз»",
+    "about.description":
+      "Instagram-да осылай танысамын. Мұнда студияның жұмыстарымен танысып, қызметті таңдап, маған тікелей жаза аласыз.",
+    "about.description2":
+      "Көлігіңізде нені жақсартқыңыз келетінін айтыңыз. Кузов пен салонның күйін талқылап, лайықты күтімді таңдаймыз.",
+    "about.alt": "Марат шеберханада жылтырату машинасымен жұмыс істеуде",
+    "process.title": "Әр кезең түсінікті.",
+    "process.one": "Міндетті талқылаймыз",
+    "process.oneDescription":
+      "Көлік моделін, қалауыңызды және фотосын жібересіз. Марат қызметті таңдауға көмектеседі.",
+    "process.two": "Жұмысты келісеміз",
+    "process.twoDescription":
+      "Тексеруден кейін көлем, материал, баға және уақытты нақтылаймыз. Барлығы жұмыс басталғанға дейін.",
+    "process.three": "Нәтижені көрсетеміз",
+    "process.threeDescription":
+      "Көлікті алған кезде қарап, кейінгі күтім бойынша ұсыныстар аласыз.",
     "faq.title": "Жиі қойылатын сұрақтар",
-    "faq.desc": "Жиі сұралатын нәрселер туралы қысқаша.",
-    "faq.q1": "Қорғаныш пленка жапсыру қанша уақыт алады?",
-    "faq.a1": "Толық жапсыру әдетте көлемі мен үлгісіне қарай 3–7 күн алады. Жергілікті аймақтарды бір күнде жасаймыз. Нақты мерзімді қараудан кейін айтамыз.",
-    "faq.q2": "Жұмысқа кепілдік бересіздер ме?",
-    "faq.a2": "Иә. Қорғаныш пленка мен керамикаға өндіруші мен студияның кепілдігі бар. Шарттар материалға байланысты, жазылу кезінде түсіндіреміз.",
-    "faq.q3": "Алдын ала жазылу керек пе?",
-    "faq.a3": "Жөн болады. Сонда боксты және материалдарды келуіңізге дайындап, күттірмейміз. Өтінім қалдырыңыз, ыңғайлы уақыт таңдаймыз.",
-    "faq.q4": "Көліктің бір бөлігін ғана жапсыруға бола ма?",
-    "faq.a4": "Әрине. Көбіне қауіп аймақтарын қорғайды: капот, бампер, айналар, табалдырықтар мен фаралар. Бұл толық жапсырудан арзан әрі осал жерлерді сақтайды.",
-    "faq.q5": "Керамика қанша уақыт тұрады?",
-    "faq.a5": "Орта есеппен құрамы мен күтіміне қарай 1–3 жыл. Гидрофобты әсер мен жылтыр бүкіл мерзім бойы сақталады, ал жуу оңайлайды.",
-  },
-};
-
-/* =============== ЯЗЫК =============== */
-function applyLang(lang) {
-  const dict = I18N[lang] || I18N.ru;
-  currentLang = I18N[lang] ? lang : "ru";
-  document.documentElement.lang = lang === "kz" ? "kk" : "ru";
-  document.querySelectorAll("[data-i18n]").forEach((el) => {
-    const key = el.getAttribute("data-i18n");
-    const val = dict[key] != null ? dict[key] : I18N.ru[key];
-    if (val == null) return;
-    if (val.indexOf("<") !== -1) el.innerHTML = val;
-    else el.textContent = val;
-  });
-  document.querySelectorAll("[data-i18n-ph]").forEach((el) => {
-    const key = el.getAttribute("data-i18n-ph");
-    const val = dict[key] != null ? dict[key] : I18N.ru[key];
-    if (val != null) el.setAttribute("placeholder", val);
-  });
-  document.querySelectorAll(".lang-btn").forEach((b) =>
-    b.classList.toggle("is-active", b.getAttribute("data-lang") === lang)
+    "faq.price": "Бағасын қалай білуге болады?",
+    "faq.priceAnswer":
+      "Маркасы, моделі және керек қызметті жазыңыз. Фото алдын ала бағалауға көмектеседі. Соңғы баға көлікті тексергеннен кейін анықталады.",
+    "faq.book": "Қалай жазылуға болады?",
+    "faq.bookAnswer":
+      "Маратқа WhatsApp-та жазыңыз немесе қоңырау шалыңыз. Ыңғайлы уақытты келісеміз. Келмес бұрын жазылуды нақтылаңыз.",
+    "faq.time": "Жұмыс қанша уақыт алады?",
+    "faq.timeAnswer":
+      "Бұл қызметке, көліктің күйіне және жұмыс көлеміне байланысты. Мерзімін жазылғанда келісіп, тексеруден кейін нақтылаймыз.",
+    "faq.film": "Пленка ма, қорғаныш жабындысы ма?",
+    "faq.filmAnswer":
+      "Пленка кузовты тас соққысынан қорғауға көмектеседі. Жабынды күтімді жеңілдетіп, жылтыр береді. Таңдау пайдалану жағдайы мен мақсатыңызға байланысты.",
+    "lead.title1": "Көлігіңізден",
+    "lead.title2": "бастайық.",
+    "lead.description":
+      "Марат лайықты шешім ұсынуы үшін бірнеше мәлімет қажет. Әңгімені WhatsApp-та жалғастырамыз.",
+    "form.name": "Атыңыз",
+    "form.namePlaceholder": "Сізге қалай хабарласуға болады?",
+    "form.phone": "Телефон (міндетті емес)",
+    "form.service": "Қай қызмет қызықтырады?",
+    "form.car": "Көліктің маркасы мен моделі",
+    "form.carPlaceholder": "Мысалы, Toyota Camry 2022",
+    "form.message": "Қалауыңыз (міндетті емес)",
+    "form.messagePlaceholder": "Көлігіңізде нені жақсартқыңыз келеді?",
+    "form.consent":
+      "Кеңес алу үшін енгізілген деректерді WhatsApp-қа беруге келісемін және таныстым:",
+    "form.privacy": "құпиялық саясаты",
+    "form.submit": "WhatsApp-та жалғастыру",
+    "form.hint": "Дайын хабарламасы бар чат ашылады. Оны өзіңіз жібересіз.",
+    "option.consultation": "Кеңес қажет",
+    "option.sale": "Сатуға дайындау",
+    "option.wash": "Детейлинг-жуу",
+    "option.ceramic": "Керамикалық жабынды",
+    "option.lights": "Фараларды жылтырату және әйнек күтімі",
+    "contacts.title": "Сізбен байланыстамыз",
+    "contacts.name": "Марат · кеңес және жазылу",
+    "contacts.visit": "Студияға келіңіз",
+    "contacts.booking":
+      "Алдын ала жазылу бойынша. Келетін уақытты Маратпен келісіңіз.",
+    "contacts.route": "Google Maps-та маршрут",
+    "contacts.twogis": "2ГИС-те ашу",
+    "contacts.mapNote":
+      "Карта жүктелмесе, маршрутты немесе 2ГИС сілтемесін ашыңыз.",
+    "map.title": "Google Maps: MARAT DETAILING орналасқан жер",
+    "footer.line": "Көзге көрінетін қамқорлық.",
+    "footer.top": "Жоғарыға",
+    "footer.privacy": "Құпиялық",
+    "footer.city": "Астана, Қазақстан",
+    "whatsapp.label": "Мараттан WhatsApp-та кеңес алу",
+  };
+  const textNodes = [...document.querySelectorAll("[data-i18n]")].map(
+    (element) => ({
+      element,
+      key: element.dataset.i18n,
+      ru: element.innerText,
+    }),
   );
-  try { localStorage.setItem("md-lang", lang); } catch (e) {}
-}
-
-/* =============== КОНТАКТЫ =============== */
-function wireContacts() {
-  const digits = (s) => (s || "").replace(/[^\d+]/g, "");
-  const wa = digits(CONFIG.whatsapp).replace(/\+/g, "");
-  const links = {
-    instagram: CONFIG.instagram || "",
-    whatsapp: wa ? "https://wa.me/" + wa : "",
-    phone: CONFIG.phone ? "tel:" + digits(CONFIG.phone) : "",
-    tiktok: CONFIG.tiktok || "",
-    twogis: CONFIG.twogis || "",
-  };
-  let anyPending = false;
-
-  document.querySelectorAll("[data-contact]").forEach((el) => {
-    const key = el.getAttribute("data-contact");
-    const url = links[key];
-    const isBtn = el.classList.contains("contact-btn");
-    if (url) {
-      el.setAttribute("href", url);
-      if (key !== "phone") {
-        el.setAttribute("target", "_blank");
-        el.setAttribute("rel", "noopener");
-      }
-    } else if (isBtn) {
-      el.classList.add("pending");
-      el.setAttribute("href", "#");
-      el.setAttribute("title", "Укажите ссылку/номер в script.js → CONFIG");
-      el.addEventListener("click", (e) => e.preventDefault());
-      anyPending = true;
-    } else {
-      // CTA-кнопки без настроенного контакта ведут к форме заявки
-      el.setAttribute("href", "#lead");
-    }
-  });
-
-  if (anyPending) {
-    const note = document.querySelector("[data-contact-note]");
-    if (note) note.hidden = false;
-  }
-}
-
-/* =============== ФОРМА ЗАЯВКИ → WHATSAPP =============== */
-function wireLeadForm() {
-  const form = document.getElementById("leadForm");
-  if (!form) return;
-  const nameEl = document.getElementById("leadName");
-  const phoneEl = document.getElementById("leadPhone");
-  const serviceEl = document.getElementById("leadService");
-  const status = document.getElementById("leadStatus");
-
-  const t = (key) => {
-    const d = I18N[currentLang] || I18N.ru;
-    return d[key] != null ? d[key] : I18N.ru[key];
-  };
-  const setStatus = (kind, key) => {
-    status.hidden = false;
-    status.textContent = t(key);
-    status.className = "lead-status " + (kind === "ok" ? "is-ok" : "is-err");
-  };
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = nameEl.value.trim();
-    const phone = phoneEl.value.trim();
-    const phoneDigits = phone.replace(/\D/g, "");
-
-    if (name.length < 2) { setStatus("err", "lead.errName"); nameEl.focus(); return; }
-    if (phoneDigits.length < 10) { setStatus("err", "lead.errPhone"); phoneEl.focus(); return; }
-
-    const wa = (CONFIG.whatsapp || "").replace(/[^\d]/g, "");
-    if (!wa) { setStatus("err", "lead.errNoWa"); return; }
-
-    const service = serviceEl.value ? serviceEl.options[serviceEl.selectedIndex].text : "";
-    let msg = t("lead.msgIntro") + "\n" + t("lead.msgName") + " " + name + "\n" + t("lead.msgPhone") + " " + phone;
-    if (service) msg += "\n" + t("lead.msgService") + " " + service;
-
-    window.open("https://wa.me/" + wa + "?text=" + encodeURIComponent(msg), "_blank", "noopener");
-    setStatus("ok", "lead.ok");
-    form.reset();
-  });
-}
-
-/* =============== КАРТА =============== */
-function wireMap() {
-  const hasAddress = CONFIG.address && CONFIG.address.trim();
-  const query = hasAddress ? CONFIG.address : CONFIG.mapQuery;
-  const frame = document.getElementById("mapFrame");
-  if (frame) {
-    // Грузим карту уже после загрузки страницы, чтобы тяжёлый iframe
-    // не блокировал первую отрисовку и анимации.
-    const src =
-      "https://www.google.com/maps?q=" +
-      encodeURIComponent(query) +
-      "&z=" + (hasAddress ? 15 : 11) +
-      "&output=embed";
-    const load = () => { frame.src = src; };
-    if (document.readyState === "complete") setTimeout(load, 200);
-    else window.addEventListener("load", () => setTimeout(load, 200));
-  }
-  const open = document.getElementById("mapOpen");
-  if (open) {
-    open.href =
-      CONFIG.twogis ||
-      "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
-  }
-  if (hasAddress) {
-    const av = document.getElementById("addressValue");
-    if (av) {
-      av.textContent = CONFIG.address;
-      av.removeAttribute("data-i18n"); // чтобы переключатель языка не затирал адрес
-    }
-  }
-}
-
-/* =============== АНИМАЦИИ ПОЯВЛЕНИЯ =============== */
-function wireReveal() {
-  const groups = document.querySelectorAll(
-    ".hero-inner, .services-grid, .process-list, .works-grid, .contacts-grid, .about-inner, .section-head"
+  const attributeNodes = ["aria", "alt", "placeholder", "title"].flatMap(
+    (attribute) =>
+      [...document.querySelectorAll(`[data-i18n-${attribute}]`)].map(
+        (element) => ({
+          element,
+          attribute: attribute === "aria" ? "aria-label" : attribute,
+          key: element.getAttribute(`data-i18n-${attribute}`),
+          ru: element.getAttribute(
+            attribute === "aria" ? "aria-label" : attribute,
+          ),
+        }),
+      ),
   );
-  groups.forEach((group) => {
-    const items = group.matches(".reveal") ? [group] : group.querySelectorAll(".reveal");
-    items.forEach((el, i) => {
-      el.style.transitionDelay = Math.min(i * 70, 350) + "ms";
-    });
-  });
-
-  const reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
-  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const show = (el) => el.classList.add("in");
-
-  if (reduce || !("IntersectionObserver" in window)) {
-    reveals.forEach(show);
-    return;
-  }
-
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          show(e.target);
-          io.unobserve(e.target);
-        }
-      });
+  let language = "ru";
+  const serviceNames = {
+    ru: {
+      consultation: "Консультация",
+      ppf: "Бронеплёнка",
+      polish: "Полировка и уход за кузовом",
+      clean: "Химчистка салона",
+      sound: "Шумоизоляция",
+      sale: "Предпродажная подготовка",
+      wash: "Детейлинг-мойка",
+      ceramic: "Керамическое покрытие",
+      lights: "Полировка фар и уход за стёклами",
     },
-    { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
-  );
-  reveals.forEach((el) => io.observe(el));
-
-  // Быстро показываем то, что уже во вьюпорте (на случай троттлинга IO).
-  requestAnimationFrame(() =>
-    requestAnimationFrame(() => {
-      reveals.forEach((el) => {
-        if (el.getBoundingClientRect().top < window.innerHeight * 0.95) {
-          show(el);
-          io.unobserve(el);
-        }
-      });
-    })
-  );
-
-  // Жёсткий фейл-сейф: контент никогда не остаётся скрытым
-  // (фоновая вкладка, headless-рендер, «мёртвый» IntersectionObserver).
-  setTimeout(() => {
-    reveals.forEach((el) => { show(el); io.unobserve(el); });
-  }, 2600);
-}
-
-/* =============== ХЕДЕР + МЕНЮ =============== */
-function wireChrome() {
-  const header = document.getElementById("header");
-  const onScroll = () => header.classList.toggle("scrolled", window.scrollY > 10);
-  onScroll();
-  window.addEventListener("scroll", onScroll, { passive: true });
-
-  const toggle = document.getElementById("menuToggle");
-  const menu = document.getElementById("mobileMenu");
-  const setMenu = (open) => {
-    menu.classList.toggle("open", open);
-    toggle.setAttribute("aria-expanded", String(open));
-    menu.setAttribute("aria-hidden", String(!open));
+    kk: {
+      consultation: "Кеңес алу",
+      ppf: "Қорғаныш пленкасы",
+      polish: "Жылтырату және кузов күтімі",
+      clean: "Салонды химиялық тазалау",
+      sound: "Шуды оқшаулау",
+      sale: "Сатуға дайындау",
+      wash: "Детейлинг-жуу",
+      ceramic: "Керамикалық жабынды",
+      lights: "Фараларды жылтырату және әйнек күтімі",
+    },
   };
-  toggle.addEventListener("click", () =>
-    setMenu(toggle.getAttribute("aria-expanded") !== "true")
+  const menuToggle = document.getElementById("menuToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  function setMenu(open, restoreFocus = false) {
+    menuToggle.setAttribute("aria-expanded", String(open));
+    mobileMenu.hidden = !open;
+    menuToggle.setAttribute(
+      "aria-label",
+      language === "kk"
+        ? kk[open ? "menu.close" : "menu.open"]
+        : open
+          ? "Закрыть меню"
+          : "Открыть меню",
+    );
+    if (restoreFocus) menuToggle.focus();
+  }
+  menuToggle.addEventListener("click", () => setMenu(mobileMenu.hidden));
+  mobileMenu.addEventListener("click", (event) => {
+    if (event.target.closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !mobileMenu.hidden) setMenu(false, true);
+  });
+  document.addEventListener("click", (event) => {
+    if (!mobileMenu.hidden && !event.target.closest(".site-header"))
+      setMenu(false);
+  });
+  matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
+    if (event.matches) setMenu(false);
+  });
+
+  function consultationMessage(service = "") {
+    const greeting =
+      language === "kk"
+        ? "Сәлеметсіз бе, Марат! Сайттан жазып отырмын. Көлігіме күтім жасау бойынша кеңес алғым келеді."
+        : "Здравствуйте, Марат! Пишу с сайта MARAT DETAILING. Хочу консультацию по уходу за автомобилем.";
+    return service && serviceNames[language][service]
+      ? `${greeting}\n${language === "kk" ? "Қызмет" : "Интересует услуга"}: ${serviceNames[language][service]}.`
+      : greeting;
+  }
+  function updateContacts() {
+    document.querySelectorAll("[data-phone]").forEach((element) => {
+      element.href = `tel:${config.phone}`;
+      element.textContent = config.phoneDisplay;
+    });
+    document.querySelectorAll("[data-whatsapp]").forEach((element) => {
+      element.href = links.whatsappUrl(
+        config.whatsapp,
+        consultationMessage(element.dataset.whatsapp),
+      );
+    });
+    document.querySelectorAll("[data-instagram]").forEach((element) => {
+      element.href = config.instagram;
+    });
+    document.querySelectorAll("[data-twogis]").forEach((element) => {
+      element.href = config.twogis;
+    });
+    document.querySelectorAll("[data-address]").forEach((element) => {
+      element.textContent = config.address[language];
+    });
+    const maps = links.mapUrls(config, language);
+    const mapFrame = document.getElementById("mapFrame");
+    if (mapFrame.src !== maps.embed) mapFrame.src = maps.embed;
+    document.getElementById("googleRoute").href = maps.route;
+  }
+  function setLanguage(value) {
+    language = value === "kk" || value === "kz" ? "kk" : "ru";
+    document.documentElement.lang = language;
+    textNodes.forEach(({ element, key, ru }) => {
+      element.textContent = language === "kk" ? kk[key] || ru : ru;
+    });
+    attributeNodes.forEach(({ element, attribute, key, ru }) => {
+      element.setAttribute(attribute, language === "kk" ? kk[key] || ru : ru);
+    });
+    document
+      .querySelectorAll("[data-lang]")
+      .forEach((button) =>
+        button.setAttribute(
+          "aria-pressed",
+          String(button.dataset.lang === language),
+        ),
+      );
+    document.title =
+      language === "kk"
+        ? "MARAT DETAILING | Астанадағы детейлинг, қорғаныш пленкасы және химиялық тазалау"
+        : "MARAT DETAILING | Детейлинг, бронеплёнка и химчистка в Астане";
+    document.querySelector('meta[name="description"]').content =
+      language === "kk"
+        ? "Астанадағы MARAT DETAILING: кузовты қорғау, жылтырату, салонды химиялық тазалау және шуды оқшаулау. Марат: +7 707 858 25 19. Дулатұлы, 180/1в."
+        : "MARAT DETAILING в Астане: бронеплёнка, полировка, химчистка, шумоизоляция и подготовка авто к продаже. Марат: +7 707 858 25 19. Дулатова, 180/1в.";
+    try {
+      localStorage.setItem("marat-language", language);
+    } catch {
+      /* Storage may be blocked; the page still works. */
+    }
+    updateContacts();
+    setMenu(false);
+    document.getElementById("formStatus").textContent = "";
+    clearPhoneError();
+  }
+  document
+    .querySelectorAll("[data-lang]")
+    .forEach((button) =>
+      button.addEventListener("click", () => setLanguage(button.dataset.lang)),
+    );
+  let savedLanguage = "ru";
+  try {
+    savedLanguage =
+      localStorage.getItem("marat-language") ||
+      localStorage.getItem("lang") ||
+      "ru";
+  } catch {
+    /* Private browsers may not allow storage. */
+  }
+
+  const form = document.getElementById("leadForm");
+  const phoneInput = document.getElementById("phone");
+  function clearPhoneError() {
+    phoneInput.removeAttribute("aria-invalid");
+    phoneInput.setCustomValidity("");
+    document.getElementById("phoneError").textContent = "";
+  }
+  phoneInput.addEventListener("input", clearPhoneError);
+  ["name", "car"].forEach((id) =>
+    document
+      .getElementById(id)
+      .addEventListener("input", (event) => event.target.setCustomValidity("")),
   );
-  menu.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
-
-  document.querySelectorAll(".lang-btn").forEach((b) =>
-    b.addEventListener("click", () => applyLang(b.getAttribute("data-lang")))
+  document.querySelectorAll("[data-select-service]").forEach((link) =>
+    link.addEventListener("click", () => {
+      document.getElementById("service").value = link.dataset.selectService;
+      document.getElementById("formStatus").textContent =
+        language === "kk"
+          ? `Таңдалған қызмет: ${serviceNames.kk[link.dataset.selectService]}`
+          : `Выбрана услуга: ${serviceNames.ru[link.dataset.selectService]}`;
+    }),
   );
-}
-
-/* =============== СТАРТ =============== */
-document.addEventListener("DOMContentLoaded", () => {
-  const yr = document.getElementById("year");
-  if (yr) yr.textContent = new Date().getFullYear();
-
-  let saved = "ru";
-  try { saved = localStorage.getItem("md-lang") || "ru"; } catch (e) {}
-  applyLang(saved);
-
-  wireContacts();
-  wireLeadForm();
-  wireMap();
-  wireReveal();
-  wireChrome();
-});
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    for (const id of ["name", "car"]) {
+      if (!String(data.get(id) || "").trim()) {
+        const input = document.getElementById(id);
+        input.setCustomValidity(
+          language === "kk" ? "Бұл өрісті толтырыңыз." : "Заполните это поле.",
+        );
+        input.reportValidity();
+        return;
+      }
+    }
+    const phone = String(data.get("phone") || "").trim();
+    if (
+      phone &&
+      (!/^[+\d\s()-]+$/.test(phone) ||
+        !/^\d{10,15}$/.test(phone.replace(/\D/g, "")))
+    ) {
+      const error =
+        language === "kk"
+          ? "10–15 цифрдан тұратын телефон нөмірін енгізіңіз."
+          : "Введите номер телефона из 10–15 цифр.";
+      phoneInput.setAttribute("aria-invalid", "true");
+      phoneInput.setCustomValidity(error);
+      document.getElementById("phoneError").textContent = error;
+      phoneInput.reportValidity();
+      return;
+    }
+    if (!form.reportValidity()) return;
+    const service =
+      serviceNames[language][data.get("service")] ||
+      serviceNames[language].consultation;
+    const labels =
+      language === "kk"
+        ? ["Атым", "Көлік", "Қызмет", "Телефон", "Қалауым"]
+        : ["Меня зовут", "Автомобиль", "Услуга", "Телефон", "Пожелания"];
+    const message = [
+      consultationMessage(),
+      `${labels[0]}: ${String(data.get("name")).trim()}`,
+      `${labels[1]}: ${String(data.get("car")).trim()}`,
+      `${labels[2]}: ${service}`,
+      phone ? `${labels[3]}: ${phone}` : "",
+      data.get("message")?.trim()
+        ? `${labels[4]}: ${data.get("message").trim()}`
+        : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    try {
+      const url = links.whatsappUrl(config.whatsapp, message);
+      document.getElementById("formStatus").textContent =
+        language === "kk"
+          ? "WhatsApp ашылуда. Хабарламаны чатта жіберіңіз."
+          : "Открываем WhatsApp. Отправьте сообщение в чате.";
+      window.location.assign(url);
+    } catch {
+      document.getElementById("formStatus").textContent =
+        language === "kk"
+          ? "Чатты ашу мүмкін болмады. Маратқа қоңырау шалыңыз."
+          : "Не удалось открыть чат. Позвоните Марату по номеру в контактах.";
+    }
+  });
+  setLanguage(savedLanguage);
+  form.querySelector('[type="submit"]').disabled = false;
+  document.getElementById("year").textContent = new Date().getFullYear();
+  if ("IntersectionObserver" in window) {
+    const navLinks = [...document.querySelectorAll(".desktop-nav a")];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries)
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              if (link.hash === `#${entry.target.id}`)
+                link.setAttribute("aria-current", "location");
+              else link.removeAttribute("aria-current");
+            });
+          }
+      },
+      { rootMargin: "-15% 0px -55% 0px", threshold: 0 },
+    );
+    document
+      .querySelectorAll("#services, #works, #about, #contacts")
+      .forEach((section) => observer.observe(section));
+  }
+})();

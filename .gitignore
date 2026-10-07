@@ -3,6 +3,11 @@ node_modules/
 Thumbs.db
 *.log
 .vercel
+test-results/
+playwright-report/
+output/
+dist/
+assets/images/*-original.png
 
 # установленные скиллы агента (восстановить: npx skills experimental_install)
 .agents/

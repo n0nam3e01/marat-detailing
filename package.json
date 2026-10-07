@@ -1,0 +1,19 @@
+{
+  "name": "marat-detailing",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Accessible bilingual detailing studio website. Static HTML, CSS and JavaScript.",
+  "scripts": {
+    "build": "node scripts/build.cjs",
+    "dev": "node scripts/server.cjs",
+    "preview": "node scripts/server.cjs --dist",
+    "test": "node --test tests/links.test.cjs",
+    "test:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
+    "prettier": "^3.9.9",
+    "sharp": "^0.35.5"
+  }
+}
