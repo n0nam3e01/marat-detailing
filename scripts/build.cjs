@@ -17,6 +17,7 @@ async function build() {
     "robots.txt",
     "sitemap.xml",
     "scripts/links.js",
+    "scripts/motion.js",
   ]) {
     await fs.copyFile(path.join(root, file), path.join(output, file));
   }
