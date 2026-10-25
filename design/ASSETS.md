@@ -13,7 +13,8 @@
 | sound.webp              | ImageGen, иллюстрация услуги                      |
 | marat-enhanced.webp     | ImageGen edit исходного 150×150 фото пользователя |
 | work-bmw.webp           | Реальная обложка публикации DZDQUmRI3OG           |
-| work-getz.webp          | Реальная обложка публикации DWGmKjCiJWM           |
+| work-getz.webp          | Архивная обложка публикации DWGmKjCiJWM            |
+| work-rox01.webp         | Реальная обложка публикации DUdAG0fiHH2: ROX01 в матовой бронеплёнке |
 
 ## Обложка, полный промпт
 
