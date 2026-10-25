@@ -143,7 +143,8 @@
     (element) => ({
       element,
       key: element.dataset.i18n,
-      ru: element.innerText,
+      // Closed <details> can return an empty innerText in Chromium.
+      ru: element.innerText || element.textContent.trim(),
     }),
   );
   const attributeNodes = ["aria", "alt", "placeholder", "title"].flatMap(

@@ -116,3 +116,25 @@ test("All breakpoints fit the viewport; reduced motion and keyboard access work"
   await page.keyboard.press("Enter");
   await expect(page.locator("#main")).toBeFocused();
 });
+
+
+test("FAQ answers survive initial Russian load and switching both languages", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/");
+  const answers = page.locator(".faq details p");
+  await expect(answers).toHaveCount(4);
+  await expect(answers.nth(0)).toContainText("Напишите марку");
+  for (const locale of ["kk", "ru", "kk", "ru"]) {
+    await page.locator('[data-lang="' + locale + '"]').click();
+    for (let index = 0; index < 4; index++) {
+      const item = page.locator(".faq details").nth(index);
+      await item.locator("summary").click();
+      await expect(item.locator("p")).toBeVisible();
+      expect((await item.locator("p").textContent()).trim().length).toBeGreaterThan(30);
+      await item.locator("summary").click();
+    }
+    await expect(answers.nth(0)).toContainText(locale === "ru" ? "Напишите марку" : "Маркасы");
+  }
+  await page.reload();
+  await expect(answers.nth(0)).toContainText("Напишите марку");
+});
