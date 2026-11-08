@@ -12,10 +12,10 @@ test("Desktop: loaded assets, correct contacts, accessible page", async ({
     "href",
     "tel:+77078582519",
   );
-  await expect(page.locator("#mapFrame")).toHaveAttribute("src", /51\.203063/);
+  await expect(page.locator("#mapFrame")).toHaveAttribute("src", /51\.17795/);
   await expect(page.locator("#googleRoute")).toHaveAttribute(
     "href",
-    /destination=51\.203063/,
+    /destination=51\.17795/,
   );
   for (const image of await page.locator("img").all()) {
     await image.scrollIntoViewIfNeeded();

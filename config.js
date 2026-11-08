@@ -5,12 +5,12 @@ window.MARAT_CONFIG = {
   phone: "+77078582519",
   phoneDisplay: "+7 707 858 25 19",
   instagram: "https://www.instagram.com/marat_detailing/",
-  twogis: "https://2gis.kz/astana/geo/9570784863353864",
+  twogis: "https://2gis.kz/astana/geo/70000001093343414",
   address: {
-    ru: "Астана, ул. Мыржакыпа Дулатова, 180/1в",
-    kk: "Астана, Мыржақып Дулатұлы көшесі, 180/1в",
+    ru: "Астана, проспект Нургиса Тлендиева, 9",
+    kk: "Астана, Нұрғиса Тілендиев даңғылы, 9",
   },
-  coordinates: { lat: 51.203063, lng: 71.358438 },
+  coordinates: { lat: 51.17795, lng: 71.386848 },
   googleMaps: {
     // Optional PUBLIC browser key. Restrict it to Maps Embed API and your domains.
     apiKey: "",

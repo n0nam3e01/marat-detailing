@@ -14,17 +14,17 @@ test("WhatsApp encodes Cyrillic, line breaks and special characters without losi
 
 test("Map and route point to the studio, and an API key selects the official Embed API", () => {
   const config = {
-    coordinates: { lat: 51.203063, lng: 71.358438 },
+    coordinates: { lat: 51.17795, lng: 71.386848 },
     googleMaps: { apiKey: "", placeId: "" },
   };
   const urls = mapUrls(config);
   assert.equal(
     new URL(urls.route).searchParams.get("destination"),
-    "51.203063,71.358438",
+    "51.17795,71.386848",
   );
   assert.equal(
     new URL(urls.embed).searchParams.get("q"),
-    "51.203063,71.358438",
+    "51.17795,71.386848",
   );
   config.googleMaps.apiKey = "test-public-key";
   config.googleMaps.placeId = "ChIJ-test";
